@@ -1,27 +1,31 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
- 
 using namespace std;
-using ll = long long;
- 
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n;
-    cin >> n;
-    vector<ll> a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int N, Q;
+    cin >> N >> Q;
+    
+    vector<long long> diff(N + 2, 0);
+    
+    for (int i = 0; i < Q; i++) {
+        int l, r;
+        long long v;
+        cin >> l >> r >> v;
+        
+        diff[l] += v;
+        diff[r + 1] -= v;
     }
-    ll total = 0;
-    for (int i = 0; i < n; i++) {
-        ll mx = a[i];
-        for (int j = i; j < n; j++) {
-            mx = max(mx, a[j]);
-            total += mx;
-        }
+    
+    vector<long long> a(N + 1, 0);
+    for (int i = 1; i <= N; i++) {
+        a[i] = a[i - 1] + diff[i];
+        cout << a[i] << " ";
     }
-    cout << total << "\n";
+    cout << endl;
+    
     return 0;
 }
