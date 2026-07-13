@@ -1,28 +1,34 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <queue>
+#include <vector>
 using namespace std;
-using ll = long long;
+
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
- 
-    int n;
-    cin >> n;
-    priority_queue<ll, vector<ll>, greater<ll>> pq;
-    for (int i = 0; i < n; i++) {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int N;
+    cin >> N;
+    
+    priority_queue<long long, vector<long long>, greater<long long>> pq;
+    
+    for (int i = 0; i < N; i++) {
         long long x;
         cin >> x;
         pq.push(x);
     }
- 
-    for (int i = 0; i < n - 1; i++) {
-        ll a = pq.top(); pq.pop();  
-        ll b = pq.top(); pq.pop();
+    
+    for (int i = 0; i < N - 1; i++) {
+        long long a = pq.top();
+        pq.pop();
+        long long b = pq.top();
+        pq.pop();
+        
         cout << a << " " << b << "\n";
-        pq.push(a + b);  
+        
+        long long sum = a + b;
+        pq.push(sum);
     }
+    
     return 0;
 }
